@@ -40,11 +40,7 @@ def webhook():
 
             # ✅ Actually send and store the response first
             send_message(chat_id, response_text)
-
-            # ✅ THEN debug print it
-            print("Telegram status code:", response.status_code)
-            print("Telegram response:", response.text)
-
+            
     return "ok", 200
 
 def send_message(chat_id, text):
@@ -52,7 +48,12 @@ def send_message(chat_id, text):
     payload = {"chat_id": chat_id, "text": text}
     requests.post(url, json=payload)
     
-   
+    try:
+        response = requests.post(url, json=payload)
+        print("📬 Telegram status code:", response.status_code)
+        print("📬 Telegram response:", response.text)
+    except Exception as e:
+        print("🚨 Telegram send error:", str(e))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
