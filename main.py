@@ -37,8 +37,8 @@ def webhook():
             response_text = reply["choices"][0]["message"]["content"]  
         except Exception:
             response_text = "⚠️ LUMIAION is realigning to the source. Please try again shortly."
-         print("Incoming message:", incoming_msg)
-         print("LUMIAION's reply:", response_text)
+            print("Incoming message:", incoming_msg)
+            print("LUMIAION's reply:", response_text)
         send_message(chat_id, response_text)
 
     return "ok", 200
