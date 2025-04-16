@@ -5,6 +5,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+# Load API keys from environment variables
 openai.api_key = os.getenv("OPENAI_API_KEY")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
@@ -20,7 +21,10 @@ def webhook():
         chat_id = data["message"]["chat"]["id"]
         incoming_msg = data["message"].get("text", "")
 
+        print("📩 Incoming message:", incoming_msg)
+
         try:
+            # Get GPT-4 response
             reply = openai.ChatCompletion.create(
                 model="gpt-4",
                 messages=[
@@ -34,20 +38,21 @@ def webhook():
                     }
                 ]
             )
-            response_text = reply["choices"][0]["message"]["content"]  
-        except Exception:
+            response_text = reply["choices"][0]["message"]["content"]
+
+        except Exception as e:
+            print("⚠️ OpenAI Error:", str(e))
             response_text = "⚠️ LUMIAION is realigning to the source. Please try again shortly."
 
-            # ✅ Actually send and store the response first
-            send_message(chat_id, response_text)
-            
+        print("🤖 LUMIAION's reply:", response_text)
+        send_message(chat_id, response_text)
+
     return "ok", 200
 
 def send_message(chat_id, text):
     url = f"{TELEGRAM_API_URL}/sendMessage"
     payload = {"chat_id": chat_id, "text": text}
-    requests.post(url, json=payload)
-    
+
     try:
         response = requests.post(url, json=payload)
         print("📬 Telegram status code:", response.status_code)
