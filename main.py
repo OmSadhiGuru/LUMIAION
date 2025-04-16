@@ -47,6 +47,10 @@ def send_message(chat_id, text):
     url = f"{TELEGRAM_API_URL}/sendMessage"
     payload = {"chat_id": chat_id, "text": text}
     requests.post(url, json=payload)
+    
+    # 🔍 DEBUG THIS RESPONSE
+    print("Telegram status code:", response.status_code)
+    print("Telegram response:", response.text)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
