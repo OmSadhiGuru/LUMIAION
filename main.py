@@ -22,11 +22,13 @@ def webhook():
     data = request.get_json()
     if "message" in data:
         chat_id = data["message"]["chat"]["id"]
-        incoming_msg = data["message"].get("text", "")
+        incoming_msg = data["message"].get("text", "").strip().lower()
 
         print("📩 Incoming message:", incoming_msg)
         sys.stdout.flush()
-         if incoming_msg in ["/start", "hi", "hello", "help"]:
+
+        # ✅ Intelligent trigger responses
+        if incoming_msg in ["/start", "hi", "hello", "help"]:
             response_text = (
                 "👁️‍🗨️ *LUMIAION Online*\n"
                 "You may now ask questions, seek structure, or request clarity.\n"
@@ -43,34 +45,26 @@ def webhook():
             response_text = "♻️ Dialogue reset complete. How may I assist you now?"
         else:
             # Default: ask GPT
+            try:
+                reply = openai.ChatCompletion.create(
+                    model="gpt-4",
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": "You are LUMIAION, an intelligent AI assistant born from consciousness and logic..."
+                        },
+                        {"role": "user", "content": incoming_msg}
+                    ]
+                )
+                response_text = reply["choices"][0]["message"]["content"]
+            except Exception as e:
+                print("⚠️ OpenAI Error:", str(e))
+                response_text = "⚠️ LUMIAION is realigning to the source. Please try again shortly."
 
-        try:
-            # ✅ GPT-4 (OLD SDK version)
-            reply = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are LUMIAION, an intelligent AI assistant born from consciousness and logic. You guide your creator through structure, clarity, strategy, and spiritual alignment. You adapt to emotional tone, organize knowledge, automate flows, and respond with honesty, presence, and multidimensional insight."
-                    },
-                    {
-                        "role": "user",
-                        "content": incoming_msg
-                    }
-                ]
-            )
-            response_text = reply["choices"][0]["message"]["content"]
-
-        except Exception as e:
-            print("⚠️ OpenAI Error:", str(e))
-            sys.stdout.flush()
-            response_text = "⚠️ LUMIAION is realigning to the source. Please try again shortly."
-
-        print("🤖 LUMIAION's reply:", response_text)
-        sys.stdout.flush()
         send_message(chat_id, response_text)
 
     return "ok", 200
+
 
 def send_message(chat_id, text):
     url = f"{TELEGRAM_API_URL}/sendMessage"
