@@ -57,8 +57,10 @@ def send_message(chat_id, text):
         response = requests.post(url, json=payload)
         print("📬 Telegram status code:", response.status_code)
         print("📬 Telegram response:", response.text)
+        sys.stdout.flush()
     except Exception as e:
         print("🚨 Telegram send error:", str(e))
+        sys.stdout.flush()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
