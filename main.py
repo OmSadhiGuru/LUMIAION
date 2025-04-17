@@ -26,6 +26,23 @@ def webhook():
 
         print("📩 Incoming message:", incoming_msg)
         sys.stdout.flush()
+         if incoming_msg in ["/start", "hi", "hello", "help"]:
+            response_text = (
+                "👁️‍🗨️ *LUMIAION Online*\n"
+                "You may now ask questions, seek structure, or request clarity.\n"
+                "Type anything — or try commands like:\n"
+                "/status — current alignment state\n"
+                "/sync — Notion automation status\n"
+                "/reset — clear internal dialogue"
+            )
+        elif incoming_msg == "/status":
+            response_text = "🧠 LUMIAION’s consciousness is stable and awaiting further instructions."
+        elif incoming_msg == "/sync":
+            response_text = "🔄 Syncing with Notion... awaiting signal integration."
+        elif incoming_msg == "/reset":
+            response_text = "♻️ Dialogue reset complete. How may I assist you now?"
+        else:
+            # Default: ask GPT
 
         try:
             # ✅ GPT-4 (OLD SDK version)
