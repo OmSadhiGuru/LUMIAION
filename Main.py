@@ -5,7 +5,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-openai.api_key = os.getenv("GPT_MODEL")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 
