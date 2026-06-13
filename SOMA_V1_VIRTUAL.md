@@ -59,9 +59,45 @@ cosmic_reports/
 └── monthly/2026-06/...
 ```
 
-Ce dossier est dans `.gitignore` : chaque génération produit un contenu
-différent (nouvelle date, nouvelles données solaires/géomagnétiques) et n'a
-pas vocation à être versionné.
+Ce dossier est versionné dans le dépôt : l'automatisation planifiée (voir
+ci-dessous) y commite chaque nouveau rapport, ce qui te donne un historique
+accessible directement sur GitHub.
+
+## Automatisation planifiée (GitHub Actions)
+
+Le workflow [`.github/workflows/cosmic-forecast.yml`](.github/workflows/cosmic-forecast.yml)
+génère automatiquement les prévisions et les commite dans `cosmic_reports/` :
+
+| Fréquence  | Quand (UTC)              | Période générée |
+|------------|--------------------------|------------------|
+| Quotidien  | tous les jours à 13h00   | `daily`          |
+| Hebdomadaire | chaque lundi à 13h00   | `weekly`         |
+| Mensuel    | le 1er du mois à 13h00   | `monthly`        |
+
+13h00 UTC ≈ 9h (heure de l'Est, été) / 8h (hiver). Pour changer l'heure,
+modifie les lignes `cron:` du fichier de workflow.
+
+Tu peux aussi le lancer manuellement depuis l'onglet **Actions** de GitHub
+(« Run workflow »), en choisissant `daily`, `weekly`, `monthly` ou `all`.
+
+### Recevoir le rapport sur Telegram (optionnel)
+
+Si tu configures ces deux secrets dans **Settings → Secrets and variables →
+Actions** du dépôt, le workflow t'envoie aussi la version Facebook du rapport
+par message Telegram à chaque exécution :
+
+- `TELEGRAM_BOT_TOKEN` — le token de ton bot (via [@BotFather](https://t.me/BotFather))
+- `TELEGRAM_CHAT_ID` — l'identifiant de la conversation où envoyer le message
+  (envoie un message à ton bot, puis visite
+  `https://api.telegram.org/bot<TOKEN>/getUpdates` pour trouver `chat.id`)
+
+⚠️ Le `main.py` actuel contient un token Telegram codé en dur — si tu
+réutilises ce bot, pense à le révoquer/régénérer via @BotFather et à ne
+passer le nouveau token que par variable d'environnement / secret.
+
+Si ces secrets ne sont pas configurés, le workflow continue de fonctionner
+normalement : il génère et commite les rapports, et ignore simplement
+l'envoi Telegram.
 
 ## Le système des chakras & portes (architecture Soma V1)
 

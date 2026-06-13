@@ -1,0 +1,85 @@
+name: Soma V1 Virtual — Cosmic Forecast
+
+on:
+  schedule:
+    # Quotidien — tous les jours à 13:00 UTC (~9h heure de l'Est en été)
+    - cron: "0 13 * * *"
+    # Hebdomadaire — chaque lundi à 13:00 UTC
+    - cron: "0 13 * * 1"
+    # Mensuel — le 1er de chaque mois à 13:00 UTC
+    - cron: "0 13 1 * *"
+  workflow_dispatch:
+    inputs:
+      period:
+        description: "Période à générer"
+        required: true
+        default: "daily"
+        type: choice
+        options:
+          - daily
+          - weekly
+          - monthly
+          - all
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cosmic-forecast
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Determine period
+        id: period
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "value=${{ github.event.inputs.period }}" >> "$GITHUB_OUTPUT"
+          else
+            case "${{ github.event.schedule }}" in
+              "0 13 * * 1") echo "value=weekly" >> "$GITHUB_OUTPUT" ;;
+              "0 13 1 * *") echo "value=monthly" >> "$GITHUB_OUTPUT" ;;
+              *) echo "value=daily" >> "$GITHUB_OUTPUT" ;;
+            esac
+          fi
+
+      - name: Generate forecast(s) & notify Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          set -e
+          period="${{ steps.period.outputs.value }}"
+          if [ "$period" = "all" ]; then
+            periods="daily weekly monthly"
+          else
+            periods="$period"
+          fi
+          for p in $periods; do
+            python send_telegram_forecast.py "$p"
+          done
+
+      - name: Commit generated reports
+        run: |
+          git config user.name "soma-v1-virtual-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add cosmic_reports
+          if ! git diff --cached --quiet; then
+            git commit -m "Soma V1 Virtual: prévision cosmique automatique (${{ steps.period.outputs.value }})"
+            git push
+          else
+            echo "Rien à commiter."
+          fi
