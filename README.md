@@ -121,6 +121,12 @@ python main.py
 the app refuses to start without a token rather than falling back to a
 hardcoded secret.
 
+It also hosts **Soma V1 Virtual** — a cosmic forecast agent (`/soma
+[daily|weekly|monthly]`) combining Schumann Resonance, solar flares,
+geomagnetic activity, lunar movement, numerology, and the 7/12/24 chakra &
+gate system into a report ready to publish on Facebook & Instagram. See
+[SOMA_V1_VIRTUAL.md](SOMA_V1_VIRTUAL.md).
+
 ---
 
 ## How the pieces connect
