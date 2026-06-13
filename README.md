@@ -11,6 +11,11 @@
 - 🌿 Emotionally adaptive and spiritually aligned replies
 - 🔄 Ready for Zapier/Notion/Render integration
 - 📡 Webhook-driven messaging system
+- 🌌 **Soma V1 Virtual** — Cosmic Forecast agent (`/soma`): daily, weekly and
+  monthly reports combining Schumann Resonance, solar flares, geomagnetic
+  activity, lunar movement, numerology, and the 7/12/24 chakra & gate
+  system — ready to publish on Facebook & Instagram. See
+  [SOMA_V1_VIRTUAL.md](SOMA_V1_VIRTUAL.md).
 
 ---
 
