@@ -4,6 +4,8 @@ import requests
 from flask import Flask, request
 import sys
 
+from soma_v1_virtual import generate_cosmic_forecast
+
 app = Flask(__name__)
 
 # ✅ Properly load keys from environment
@@ -36,8 +38,23 @@ def webhook():
                 "📝 /task meditate at 7pm\n"
                 "🧠 /remember you are loved\n"
                 "📔 /notion log thought\n"
+                "🌌 /soma [daily|weekly|monthly] — Cosmic Forecast (Soma V1 Virtual)\n"
                 "⚙️ /status, /sync, or /reset"
             )
+        elif incoming_msg.startswith("/soma"):
+            parts = incoming_msg.split()
+            period = parts[1] if len(parts) > 1 else "daily"
+            if period not in ("daily", "weekly", "monthly"):
+                period = "daily"
+            try:
+                result = generate_cosmic_forecast(period=period)
+                response_text = (
+                    result["instagram_post"]
+                    + f"\n\n📁 Rapport complet enregistré : {result['output_dir']}"
+                )
+            except Exception as e:
+                print("⚠️ Soma V1 Virtual Error:", str(e))
+                response_text = f"⚠️ Soma V1 Virtual n'a pas pu générer la prévision cosmique : {e}"
         elif incoming_msg.startswith("/task"):
             response_text = "📝 Task saved: " + incoming_msg[6:].strip()
         elif incoming_msg.startswith("/remember"):
