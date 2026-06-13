@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #05010f;
+  --color-abyss: #0a0420;
+  --color-deep: #120a2e;
+  --color-nebula: #7c3aed;
+  --color-aurora: #22d3ee;
+  --color-gold: #f5c542;
+  --color-ember: #fb7185;
+  --color-jade: #34d399;
+  --color-skylight: #60a5fa;
+
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(2%, -3%, 0) scale(1.04); }
+  66% { transform: translate3d(-2%, 2%, 0) scale(0.97); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+.animate-drift {
+  animation: drift 22s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 50s linear infinite;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-void);
+  color: #f3f1ff;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+/* Fractal canvas: rendered small internally, scaled up for a soft luminous look at any resolution */
+.fractal-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: auto;
+  filter: saturate(1.15) brightness(1.05);
+}
+
+/* Glass panel used across the app */
+.glass {
+  background: rgba(18, 10, 46, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Custom scrollbar for the cosmic theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.4);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Safe-area aware spacing for mobile PWA install */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
