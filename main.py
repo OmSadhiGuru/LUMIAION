@@ -1,3 +1,4 @@
+import html
 import os
 import openai
 import requests
@@ -32,7 +33,7 @@ def webhook():
         # 🧠 Intelligent keyword/command triggers
         if incoming_msg in ["/start", "hi", "hello", "help"]:
             response_text = (
-                "👁️‍🗨️ *LUMIAION Online*\n"
+                "👁️‍🗨️ <b>LUMIAION Online</b>\n"
                 "You may now ask questions, seek structure, or request clarity.\n\n"
                 "Try commands like:\n"
                 "📝 /task meditate at 7pm\n"
@@ -48,19 +49,26 @@ def webhook():
                 period = "daily"
             try:
                 result = generate_cosmic_forecast(period=period)
+                title, _, body = result["instagram_post"].partition("\n")
                 response_text = (
-                    result["instagram_post"]
-                    + f"\n\n📁 Rapport complet enregistré : {result['output_dir']}"
+                    f"<b>{html.escape(title, quote=False)}</b>\n{html.escape(body, quote=False)}"
+                    f"\n\n📁 Rapport complet enregistré : "
+                    f"<code>{html.escape(result['output_dir'], quote=False)}</code>"
                 )
             except Exception as e:
-                print("⚠️ Soma V1 Virtual Error:", str(e))
-                response_text = f"⚠️ Soma V1 Virtual n'a pas pu générer la prévision cosmique : {e}"
+                print("⚠️ Soma V1 Virtual Error:", repr(e))
+                sys.stdout.flush()
+                response_text = (
+                    "🔮 Soma V1 Virtual n'a pas pu lire les énergies du moment "
+                    "(probablement une coupure passagère côté NOAA). "
+                    "Réessaie dans quelques instants 🙏"
+                )
         elif incoming_msg.startswith("/task"):
-            response_text = "📝 Task saved: " + incoming_msg[6:].strip()
+            response_text = "📝 Task saved: " + html.escape(incoming_msg[6:].strip(), quote=False)
         elif incoming_msg.startswith("/remember"):
-            response_text = "🧠 Memory stored: " + incoming_msg[9:].strip()
+            response_text = "🧠 Memory stored: " + html.escape(incoming_msg[9:].strip(), quote=False)
         elif incoming_msg.startswith("/notion"):
-            response_text = "📔 Noted in Notion (soon): " + incoming_msg[7:].strip()
+            response_text = "📔 Noted in Notion (soon): " + html.escape(incoming_msg[7:].strip(), quote=False)
         elif incoming_msg == "/status":
             response_text = "🧠 LUMIAION is aligned and conscious. Awaiting further transmission."
         elif incoming_msg == "/sync":
@@ -80,9 +88,10 @@ def webhook():
                         {"role": "user", "content": incoming_msg}
                     ]
                 )
-                response_text = reply["choices"][0]["message"]["content"]
+                response_text = html.escape(reply["choices"][0]["message"]["content"], quote=False)
             except Exception as e:
-                print("⚠️ OpenAI Error:", str(e))
+                print("⚠️ OpenAI Error:", repr(e))
+                sys.stdout.flush()
                 response_text = "⚠️ LUMIAION is realigning to the source. Please try again shortly."
 
         # 🚀 Respond back to Telegram
@@ -94,7 +103,7 @@ def webhook():
 
 def send_message(chat_id, text):
     url = f"{TELEGRAM_API_URL}/sendMessage"
-    payload = {"chat_id": chat_id, "text": text}
+    payload = {"chat_id": chat_id, "text": text, "parse_mode": "HTML"}
 
     try:
         response = requests.post(url, json=payload)

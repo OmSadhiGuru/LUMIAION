@@ -18,12 +18,35 @@ MONTH_NAMES_FR = [
 ]
 
 DISCLAIMER_FR = (
-    "✨ Soma V1 Virtual — Prévision Cosmique à but de divertissement et de "
-    "réflexion personnelle. Les données scientifiques (activité solaire et "
-    "géomagnétique) proviennent de NOAA SWPC. Les éléments numérologiques, "
-    "lunaires symboliques, chakras et fréquences relèvent d'une lecture "
-    "énergétique/spirituelle et ne remplacent aucun avis médical, "
-    "scientifique ou professionnel."
+    "✨ Soma V1 Virtual — Prévision Cosmique à but de divertissement, "
+    "d'inspiration et de réflexion personnelle. ⚠️ Les sections marquées 🔮 "
+    "sont une lecture symbolique : une exploration des interconnexions "
+    "entre le ciel, les cycles et l'énergie, en constante évolution — à "
+    "interpréter, non à prendre comme une vérité établie. Seules les "
+    "sections marquées ✅ (activité solaire et géomagnétique, NOAA SWPC) "
+    "sont des données réelles. Rien ici ne remplace un avis médical, "
+    "scientifique ou professionnel. En lisant ou partageant ce message, tu "
+    "reconnais qu'il s'agit d'une interprétation ouverte, et non d'une "
+    "affirmation de fait."
+)
+
+LEGEND_FR = (
+    "🔑 **Comment lire cette prévision** — ✅ Faits mesurés (NOAA SWPC) : "
+    "activité solaire et géomagnétique, données scientifiques réelles et "
+    "publiées en direct. 🔮 Lecture symbolique (Soma V1) : résonance de "
+    "Schumann, lune, numérologie, chakras, portes, fréquences et couleurs — "
+    "une carte d'interconnexions à visée de réflexion, en constante "
+    "évolution, à interpréter et non à prendre comme une vérité établie."
+)
+
+SHORT_LEGEND_FR = (
+    "🔑 ✅ donnée réelle (NOAA) · 🔮 lecture symbolique "
+    "(interprétation, en constante évolution)"
+)
+
+SHORT_DISCLAIMER_FR = (
+    "✨ Divertissement & réflexion. Lecture symbolique 🔮 ouverte à "
+    "interprétation — pas un fait établi, sauf mention ✅ (données NOAA)."
 )
 
 BASE_HASHTAGS = [
@@ -299,11 +322,13 @@ def render_full_report(report: dict) -> str:
         )
     lines.append(f"**Généré le :** {report['generated_at']}")
     lines.append("")
+    lines.append(LEGEND_FR)
+    lines.append("")
     lines.append("---")
     lines.append("")
 
     s = report["schumann"]
-    lines.append("## 🌍 Résonance de Schumann")
+    lines.append("## 🌍 Résonance de Schumann 🔮")
     lines.append(f"- Fréquence fondamentale : **{s['base_frequency_hz']} Hz**")
     lines.append(f"- Lecture estimée du jour : **{s['estimated_reading_hz']} Hz**")
     lines.append(f"- Harmoniques : {', '.join(str(h) for h in s['harmonics_hz'])} Hz")
@@ -313,7 +338,7 @@ def render_full_report(report: dict) -> str:
     lines.append("")
 
     sol = report["solar"]
-    lines.append("## ☀️ Activité Solaire")
+    lines.append("## ☀️ Activité Solaire ✅")
     if sol.get("flare_count") is not None:
         lines.append(f"- Éruptions détectées (24h) : **{sol['flare_count']}**")
         if sol.get("strongest_class"):
@@ -324,7 +349,7 @@ def render_full_report(report: dict) -> str:
 
     geo = report["geomagnetic"]
     storm = report["storm_outlook"]
-    lines.append("## 🧭 Activité Géomagnétique")
+    lines.append("## 🧭 Activité Géomagnétique ✅")
     lines.append(f"- Indice Kp : **{geo['kp_index']}** — {geo['level']}")
     lines.append(f"- {geo['interpretation']}")
     if storm.get("g_scale") is not None:
@@ -333,7 +358,7 @@ def render_full_report(report: dict) -> str:
     lines.append("")
 
     moon = report["lunar"]
-    lines.append("## 🌙 Mouvement Lunaire")
+    lines.append("## 🌙 Mouvement Lunaire 🔮")
     lines.append(f"- Phase actuelle : **{moon['phase_name']}** ({moon['illumination_pct']}% illuminée)")
     lines.append(f"- Signe zodiacal : **{moon['zodiac_sign']}** ({moon['zodiac_degree']}°)")
     lines.append(f"- Âge de la Lune : {moon['age_days']} jours")
@@ -346,7 +371,7 @@ def render_full_report(report: dict) -> str:
     lines.append("")
 
     num = report["numerology"]
-    lines.append("## 🔢 Numérologie")
+    lines.append("## 🔢 Numérologie 🔮")
     lines.append(f"- {num['label']} : **{num['number']} — {num['keyword']}**")
     lines.append(f"- Thème : {num['theme']}")
     lines.append(f"- Affirmation : _{num['affirmation']}_")
@@ -354,7 +379,7 @@ def render_full_report(report: dict) -> str:
 
     c7 = report["chakra_7"]
     c12 = report["chakra_12"]
-    lines.append("## 🌈 Alignement Chakras & Portes")
+    lines.append("## 🌈 Alignement Chakras & Portes 🔮")
     lines.append(f"### Chakra Focus (système des 7) : {c7['name']} ({c7['sanskrit']})")
     lines.append(f"- Mot-clé : {c7['keyword']}")
     lines.append(f"- Thème : {c7['theme']}")
@@ -370,14 +395,14 @@ def render_full_report(report: dict) -> str:
     lines.append("")
 
     spec = report["spectrum"]
-    lines.append("## 🎼 Spectre Fréquences & Couleurs")
+    lines.append("## 🎼 Spectre Fréquences & Couleurs 🔮")
     lines.append(f"- Fréquences (Hz) : {', '.join(str(f) for f in spec['frequencies_hz'])}")
     lines.append("- Couleurs :")
     for c in spec["colors"]:
         lines.append(f"  - {c['name']} ({c['hex']}) — {c['source']}")
     lines.append("")
 
-    lines.append("## ✨ Synthèse Soma V1")
+    lines.append("## ✨ Synthèse Soma V1 🔮")
     lines.append(report["synthesis"])
     lines.append("")
     lines.append("---")
@@ -422,6 +447,7 @@ def render_facebook_post(report: dict) -> str:
     lines.append("")
     lines.append(_hashtags(report))
     lines.append("")
+    lines.append(SHORT_LEGEND_FR)
     lines.append(DISCLAIMER_FR)
 
     return "\n".join(lines)
@@ -445,6 +471,9 @@ def render_instagram_post(report: dict) -> str:
     lines.append(f"🌈 {c7['name']} · {c7['frequency_hz']}Hz · {c7['color_name']}")
     lines.append("")
     lines.append(report["synthesis"])
+    lines.append("")
+    lines.append(SHORT_LEGEND_FR)
+    lines.append(SHORT_DISCLAIMER_FR)
     lines.append("")
     lines.append(_hashtags(report, extra=True))
 

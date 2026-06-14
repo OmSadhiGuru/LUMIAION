@@ -147,11 +147,23 @@ facilement modifiables :
 - **Lune** : calcul astronomique (théorie lunaire simplifiée de Meeus),
   sans dépendance externe.
 
-## Avertissement
+## Avertissement & légende ✅ / 🔮
 
-Chaque rapport inclut automatiquement un avertissement : ce contenu est à
-but de **divertissement et de réflexion personnelle**. Les données solaires
-et géomagnétiques sont réelles (NOAA), mais les éléments numérologiques,
-lunaires symboliques, chakras et fréquences relèvent d'une lecture
-énergétique/spirituelle et ne remplacent aucun avis médical, scientifique
-ou professionnel.
+Chaque rapport (complet, Facebook, Instagram) inclut automatiquement une
+légende et un avertissement : ce contenu est à but de **divertissement,
+d'inspiration et de réflexion personnelle**.
+
+Chaque section est marquée pour distinguer clairement deux niveaux
+d'information :
+
+- ✅ **Faits mesurés** — activité solaire et activité géomagnétique :
+  données scientifiques réelles, publiées en direct par NOAA SWPC.
+- 🔮 **Lecture symbolique** — résonance de Schumann, lune, numérologie,
+  chakras, portes, fréquences et couleurs : une carte d'interconnexions à
+  visée de réflexion personnelle, en constante évolution, à **interpréter**
+  et non à prendre comme une vérité établie.
+
+Rien dans ces rapports ne remplace un avis médical, scientifique ou
+professionnel. En lisant ou partageant un rapport Soma V1, on reconnaît
+qu'il s'agit d'une interprétation ouverte (sections 🔮), et non d'une
+affirmation de fait.
