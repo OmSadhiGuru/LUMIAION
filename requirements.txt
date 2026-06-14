@@ -1,5 +1,2 @@
 flask
-openai
 requests
-openai==0.28
-notion-client==2.2.1
