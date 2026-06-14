@@ -24,6 +24,18 @@ forme sous plusieurs formats prêts à publier sur Facebook et Instagram
 
 ## Utilisation
 
+### Via Telegram
+
+```
+/soma            -> prévision du jour
+/soma daily      -> prévision du jour
+/soma weekly     -> prévision de la semaine
+/soma monthly    -> prévision du mois
+```
+
+Le bot répond avec la version Instagram (courte, prête à copier-coller) et
+indique le dossier où le rapport complet a été enregistré.
+
 ### En ligne de commande
 
 ```bash

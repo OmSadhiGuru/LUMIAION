@@ -1,13 +1,14 @@
-# 💰 Crypto Buy Timing
+# 🌀 VORTEX — Crypto Buy Timing
 
-Crypto Buy Timing est le mini tableau de bord de LUMIAION qui indique, pour
+VORTEX est un mini tableau de bord de trading **indépendant et isolé** du
+reste de LUMIAION (Soma V1 Virtual, bot Telegram, etc.). Il indique, pour
 **BTC/USDT** et **l'Or (XAU/USD)**, s'il s'agit actuellement d'un bon moment
 pour acheter, et quels sont historiquement les meilleurs horaires.
 
 ## Accès
 
-- **Dashboard web** : route `/crypto` (page HTML avec graphiques).
-- **Données brutes (JSON)** : route `/api/crypto-timing`.
+- **Dashboard web** : route `/vortex` (page HTML avec graphiques).
+- **Données brutes (JSON)** : route `/api/vortex`.
 
 ## Sources de données
 
@@ -42,13 +43,13 @@ bougies horaires sur ~30 jours) :
 
 ## Personnaliser
 
-- `crypto_buy_timing/analyzer.py` — liste des actifs suivis (`ASSETS`),
-  logique du signal d'achat (`_signal`) et de l'analyse de saisonnalité
+- `vortex/analyzer.py` — liste des actifs suivis (`ASSETS`), logique du
+  signal d'achat (`_signal`) et de l'analyse de saisonnalité
   (`_best_buy_windows`).
-- `crypto_buy_timing/indicators.py` — RSI, SMA, bandes de Bollinger, z-score
-  glissant (implémentations sans dépendance externe).
-- `crypto_buy_timing/data_sources.py` — appel à l'API Kraken.
-- `templates/crypto_dashboard.html` — mise en forme du dashboard.
+- `vortex/indicators.py` — RSI, SMA, bandes de Bollinger, z-score glissant
+  (implémentations sans dépendance externe).
+- `vortex/data_sources.py` — appel à l'API Kraken.
+- `templates/vortex_dashboard.html` — mise en forme du dashboard.
 
 ## Avertissement
 
