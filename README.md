@@ -28,7 +28,28 @@
 - **Framework:** Flask
 - **AI Engine:** OpenAI GPT-4
 - **Messaging:** Telegram Bot API
-- **Deployment:** Render
+- **Deployment:** Render or Replit
+
+---
+
+## ☁️ Déployer sur Replit
+
+1. Sur [replit.com](https://replit.com), clique **Create Repl** → **Import from GitHub**
+   et colle l'URL de ce dépôt.
+2. Dans l'onglet **Secrets** du Repl, ajoute :
+   - `OPENAI_API_KEY`
+   - `TELEGRAM_BOT_TOKEN`
+3. Clique **Run** (le fichier `.replit` lance automatiquement
+   `pip install -r requirements.txt` puis `python3 main.py`).
+4. Utilise le bouton **Deploy** de Replit pour obtenir une URL publique
+   permanente. Le dashboard Crypto Buy Timing est alors disponible sur
+   `<ton-url>/crypto`.
+
+> ⚠️ **Sécurité** : un ancien jeton de bot Telegram était codé en dur dans
+> `main.py` et a été retiré du code. Comme il a circulé dans l'historique
+> Git, régénère ce jeton via [@BotFather](https://t.me/BotFather) puis
+> renseigne le nouveau dans `TELEGRAM_BOT_TOKEN` (Secrets Replit / variables
+> d'environnement Render).
 
 ---
 

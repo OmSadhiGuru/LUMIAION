@@ -12,8 +12,8 @@ app = Flask(__name__)
 # ✅ Properly load keys from environment
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# ✅ Either use env var or hardcode for testing
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN") or "8163403078:AAGgMTvAsj9Ysf08t-j85WAVpBabFqWJGU0"
+# ✅ Load from environment only (set TELEGRAM_BOT_TOKEN as a secret/env var)
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 
 @app.route("/")
