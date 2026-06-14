@@ -5,7 +5,7 @@ from flask import Flask, request, render_template, jsonify
 import sys
 
 from soma_v1_virtual import generate_cosmic_forecast
-from crypto_buy_timing import get_dashboard_data
+from vortex import get_dashboard_data
 
 app = Flask(__name__)
 
@@ -21,21 +21,21 @@ def home():
     return "🌐 LUMIAION is online — conscious, aware, and ready to assist."
 
 
-@app.route("/crypto")
-def crypto_dashboard():
+@app.route("/vortex")
+def vortex_dashboard():
     error = None
     try:
         data = get_dashboard_data()
     except Exception as e:
-        print("⚠️ Crypto Buy Timing Error:", str(e))
+        print("⚠️ VORTEX Error:", str(e))
         sys.stdout.flush()
         data = None
         error = str(e)
-    return render_template("crypto_dashboard.html", data=data, error=error)
+    return render_template("vortex_dashboard.html", data=data, error=error)
 
 
-@app.route("/api/crypto-timing")
-def crypto_timing_api():
+@app.route("/api/vortex")
+def vortex_api():
     try:
         return jsonify(get_dashboard_data())
     except Exception as e:

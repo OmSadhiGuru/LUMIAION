@@ -16,10 +16,11 @@
   activity, lunar movement, numerology, and the 7/12/24 chakra & gate
   system — ready to publish on Facebook & Instagram. See
   [SOMA_V1_VIRTUAL.md](SOMA_V1_VIRTUAL.md).
-- 💰 **Crypto Buy Timing** — web dashboard (`/crypto`) showing current buy
-  signals (RSI, moving averages, Bollinger Bands) and the historically best
-  hours/days to buy for BTC/USDT and Gold (XAU/USD). See
-  [CRYPTO_BUY_TIMING.md](CRYPTO_BUY_TIMING.md).
+- 🌀 **VORTEX** — independent, isolated trading dashboard (`/vortex`) showing
+  current buy signals (RSI, moving averages, Bollinger Bands) and the
+  historically best hours/days to buy for BTC/USDT and Gold (XAU/USD). VORTEX
+  is a separate module from the LUMIAION/Soma assistant. See
+  [VORTEX.md](VORTEX.md).
 
 ---
 
@@ -42,8 +43,8 @@
 3. Clique **Run** (le fichier `.replit` lance automatiquement
    `pip install -r requirements.txt` puis `python3 main.py`).
 4. Utilise le bouton **Deploy** de Replit pour obtenir une URL publique
-   permanente. Le dashboard Crypto Buy Timing est alors disponible sur
-   `<ton-url>/crypto`.
+   permanente. Le dashboard VORTEX (trading, indépendant de Soma/LUMIAION)
+   est alors disponible sur `<ton-url>/vortex`.
 
 > ⚠️ **Sécurité** : un ancien jeton de bot Telegram était codé en dur dans
 > `main.py` et a été retiré du code. Comme il a circulé dans l'historique
