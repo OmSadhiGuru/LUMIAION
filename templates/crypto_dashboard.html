@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="300">
+  <title>LUMIAION — Crypto Buy Timing</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card-bg: #131a30;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #7dd3fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0 1rem 3rem;
+    }
+    header { text-align: center; padding: 2rem 1rem 1rem; }
+    header h1 { margin: 0; font-size: 1.8rem; }
+    .subtitle { color: var(--muted); margin: .25rem 0; }
+    .timestamp { color: var(--muted); font-size: .85rem; }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .card-header h2 { margin: 0; font-size: 1.2rem; }
+    .asset-name { color: var(--muted); font-size: .9rem; font-weight: normal; }
+    .badge {
+      padding: .25rem .75rem;
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge.strong-buy { background: #16a34a; color: #fff; }
+    .badge.buy { background: #4ade80; color: #052e16; }
+    .badge.wait { background: #facc15; color: #422006; }
+    .badge.avoid { background: #f87171; color: #450a0a; }
+    .badge.neutral { background: #475569; color: #f1f5f9; }
+    .note { color: var(--muted); font-size: .85rem; margin: .5rem 0 1rem; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: .75rem;
+      margin-bottom: .75rem;
+    }
+    .metric { display: flex; flex-direction: column; }
+    .metric-label {
+      color: var(--muted);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .metric-value { font-size: 1.1rem; font-weight: 600; }
+    .metric-value.up { color: #4ade80; }
+    .metric-value.down { color: #f87171; }
+    .reason { font-size: .9rem; margin: .5rem 0 1rem; }
+    .best-times {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: .75rem;
+      margin-bottom: 1rem;
+      font-size: .9rem;
+    }
+    .best-times strong {
+      display: block;
+      color: var(--accent);
+      margin-bottom: .25rem;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .error, .error-text { color: #f87171; }
+    footer {
+      max-width: 720px;
+      margin: 2rem auto 0;
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💰 LUMIAION — Crypto Buy Timing</h1>
+    <p class="subtitle">Signaux d'achat pour BTC/USDT &amp; Or (XAU/USD)</p>
+    {% if data %}
+    <p class="timestamp">Dernière mise à jour : {{ data.generated_at }}</p>
+    {% endif %}
+  </header>
+
+  <main>
+    {% if error %}
+    <div class="card error">⚠️ Impossible de charger les données : {{ error }}</div>
+    {% endif %}
+
+    {% if data %}
+    {% for asset in data.assets %}
+    <section class="card">
+      <div class="card-header">
+        <h2>{{ asset.label }} <span class="asset-name">({{ asset.name }})</span></h2>
+        {% if asset.error %}
+        <span class="badge neutral">Indisponible</span>
+        {% else %}
+        <span class="badge {{ asset.signal.level }}">{{ asset.signal.label }}</span>
+        {% endif %}
+      </div>
+
+      {% if asset.error %}
+        <p class="error-text">⚠️ {{ asset.error }}</p>
+      {% else %}
+        <p class="note">{{ asset.note }}</p>
+
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-label">Prix actuel</span>
+            <span class="metric-value">${{ "%.2f"|format(asset.price) }}</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Variation 24h</span>
+            <span class="metric-value {{ 'up' if asset.change_24h_pct is not none and asset.change_24h_pct >= 0 else 'down' }}">
+              {% if asset.change_24h_pct is not none %}{{ "%.2f"|format(asset.change_24h_pct) }}%{% else %}N/A{% endif %}
+            </span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">RSI (14)</span>
+            <span class="metric-value">{{ "%.1f"|format(asset.rsi14) if asset.rsi14 is not none else "N/A" }}</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">SMA 20 / 50</span>
+            <span class="metric-value">
+              {{ "%.2f"|format(asset.sma20) if asset.sma20 is not none else "N/A" }} /
+              {{ "%.2f"|format(asset.sma50) if asset.sma50 is not none else "N/A" }}
+            </span>
+          </div>
+        </div>
+
+        <p class="reason">{{ asset.signal.reason }}</p>
+
+        <div class="best-times">
+          <div>
+            <strong>Meilleures heures (UTC, 30 j)</strong>
+            <p>
+              {% for h in asset.best_hours_utc %}{{ "%02d:00"|format(h) }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </p>
+          </div>
+          <div>
+            <strong>Meilleurs jours</strong>
+            <p>{{ asset.best_days | join(", ") }}</p>
+          </div>
+        </div>
+
+        <canvas id="chart-{{ asset.id }}" height="100"></canvas>
+        <script>
+          (function () {
+            const ctx = document.getElementById("chart-{{ asset.id }}");
+            const history = {{ asset.history | tojson }};
+            new Chart(ctx, {
+              type: "line",
+              data: {
+                labels: history.map(p => new Date(p.time * 1000).toLocaleString("fr-FR", { weekday: "short", hour: "2-digit" })),
+                datasets: [{
+                  label: "{{ asset.label }}",
+                  data: history.map(p => p.close),
+                  borderColor: "#7dd3fc",
+                  backgroundColor: "rgba(125, 211, 252, 0.1)",
+                  borderWidth: 1.5,
+                  pointRadius: 0,
+                  tension: 0.2,
+                  fill: true,
+                }],
+              },
+              options: {
+                responsive: true,
+                scales: {
+                  x: { ticks: { maxTicksLimit: 8, color: "#94a3b8" }, grid: { display: false } },
+                  y: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(148,163,184,0.1)" } },
+                },
+                plugins: { legend: { display: false } },
+              },
+            });
+          })();
+        </script>
+      {% endif %}
+    </section>
+    {% endfor %}
+    {% endif %}
+  </main>
+
+  <footer>
+    <p>
+      ⚠️ Ceci n'est pas un conseil financier. Les signaux sont basés sur des
+      indicateurs techniques simples (RSI, moyennes mobiles, bandes de
+      Bollinger) et une analyse statistique des 30 derniers jours — ils ne
+      garantissent aucune performance future.
+    </p>
+    <p><a href="/api/crypto-timing">Voir les données brutes (JSON)</a></p>
+  </footer>
+</body>
+</html>

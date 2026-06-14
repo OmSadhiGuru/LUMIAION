@@ -16,6 +16,10 @@
   activity, lunar movement, numerology, and the 7/12/24 chakra & gate
   system — ready to publish on Facebook & Instagram. See
   [SOMA_V1_VIRTUAL.md](SOMA_V1_VIRTUAL.md).
+- 💰 **Crypto Buy Timing** — web dashboard (`/crypto`) showing current buy
+  signals (RSI, moving averages, Bollinger Bands) and the historically best
+  hours/days to buy for BTC/USDT and Gold (XAU/USD). See
+  [CRYPTO_BUY_TIMING.md](CRYPTO_BUY_TIMING.md).
 
 ---
 
