@@ -10,11 +10,37 @@
   monthly reports combining Schumann Resonance, solar flares, geomagnetic
   activity, lunar movement, numerology, and the 7/12/24 chakra & gate
   system — ready to publish on Facebook & Instagram. See
-  [SOMA_V1_VIRTUAL.md](SOMA_V1_VIRTUAL.md).
+  [SOMA_V1_VIRTUAL.md](SOMA_V1_VIRTUAL.md). In the OSG Grand Archives this
+  runtime is **SOHMA** — see
+  [docs/04_agents/SOHMA_AGENT.md](docs/04_agents/SOHMA_AGENT.md).
 - 💰 **Crypto Buy Timing** — web dashboard (`/crypto`) showing current buy
   signals (RSI, moving averages, Bollinger Bands) and the historically best
   hours/days to buy for BTC/USDT and Gold (XAU/USD). See
-  [CRYPTO_BUY_TIMING.md](CRYPTO_BUY_TIMING.md).
+  [CRYPTO_BUY_TIMING.md](CRYPTO_BUY_TIMING.md). In the OSG Grand Archives this
+  runtime is **VORTEX** — see
+  [docs/04_agents/VORTEX_AGENT.md](docs/04_agents/VORTEX_AGENT.md).
+
+---
+
+## 📚 Architecture — The OSG Grand Archives
+
+LUMIAION is not one feature — it is the central intelligence layer (the "nervous
+system") that every school, database, agent, and dashboard in the OSG ecosystem
+connects back to. The full architecture lives in [`/docs`](docs/), starting with
+[`docs/00_lumiaion_core/LUMIAION_MASTER_ARCHITECTURE.md`](docs/00_lumiaion_core/LUMIAION_MASTER_ARCHITECTURE.md):
+
+```
+docs/
+├── 00_lumiaion_core/         — LUMIAION's master architecture, identity protocol, agent map
+├── 01_osg_grand_archives/     — the 10-database Notion knowledge graph blueprint
+├── 02_schools/                 — the 9 Schools of OSG (curriculum + content templates)
+├── 03_lumiaion_observatory/    — Frederick's private evolution/journal/dream system
+└── 04_agents/                   — SOHMA, VORTEX, JERANIUM agent profiles
+```
+
+Every document in `/docs` answers the **Four Questions**: How does this feed Lumiaion?
+How does Lumiaion read this? How does Lumiaion connect this to transformation? How does
+Lumiaion convert this into action, insight, or service?
 
 ---
 
