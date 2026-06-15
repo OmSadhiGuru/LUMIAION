@@ -60,6 +60,14 @@ Plus the tags added during the Metaphysical Consciousness pilot (see
 `Inner Senses`, `Imagination`, `Theta States`, `Non-Duality`, `Ego Dissolution`,
 `Awakening`, `Witness Consciousness`, `Personality Architecture`, `Practice`.
 
+Plus the tag added during the Natural Intelligence build (School 5; see
+`../02_schools/SCHOOL_OF_NATURAL_INTELLIGENCE.md` §4): `Natural Systems` —
+covers content whose subject matter is non-human living systems and their
+intelligence (biomimicry, plant/herbal wisdom, animal instinct, ecological
+systems), distinct from `Embodiment` (human body/somatic intelligence) and
+`Cosmology & Cycles` (timing/rhythm content, which stays separate from the
+systems-themselves tag).
+
 ### Related-Schools (relation, self-relation on Schools DB)
 Lets a School point to sibling schools where its subjects overlap — the seed of the
 cross-school knowledge graph.
