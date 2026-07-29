@@ -1,0 +1,265 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "metric_type": {
+      "title": "Metric Type",
+      "type": "string"
+    },
+    "start_time": {
+      "format": "date-time",
+      "title": "Start Time",
+      "type": "string"
+    },
+    "end_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "End Time"
+    },
+    "timezone": {
+      "title": "Timezone",
+      "type": "string"
+    },
+    "original_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Original Value"
+    },
+    "original_unit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Original Unit"
+    },
+    "normalized_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Normalized Value"
+    },
+    "normalized_unit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normalized Unit"
+    },
+    "source_platform": {
+      "title": "Source Platform",
+      "type": "string"
+    },
+    "source_application": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Application"
+    },
+    "source_device": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Device"
+    },
+    "source_record_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Record Id"
+    },
+    "extraction_method": {
+      "title": "Extraction Method",
+      "type": "string"
+    },
+    "measurement_type": {
+      "enum": [
+        "measured",
+        "device_estimated",
+        "calculated",
+        "manual",
+        "inferred",
+        "unverified"
+      ],
+      "title": "Measurement Type",
+      "type": "string"
+    },
+    "validation_status": {
+      "default": "unverified",
+      "enum": [
+        "valid",
+        "questionable",
+        "invalid",
+        "unverified"
+      ],
+      "title": "Validation Status",
+      "type": "string"
+    },
+    "confidence": {
+      "default": 0.0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "validation_messages": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Validation Messages",
+      "type": "array"
+    },
+    "raw_source_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Raw Source Path"
+    },
+    "imported_at": {
+      "format": "date-time",
+      "title": "Imported At",
+      "type": "string"
+    },
+    "transformation_version": {
+      "default": "1.0.0",
+      "title": "Transformation Version",
+      "type": "string"
+    },
+    "transformations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Transformations",
+      "type": "array"
+    },
+    "duplicate_status": {
+      "anyOf": [
+        {
+          "enum": [
+            "unique",
+            "duplicate",
+            "possible_duplicate"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Duplicate Status"
+    },
+    "duplicate_of": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Duplicate Of"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "import_batch_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Import Batch Id"
+    }
+  },
+  "required": [
+    "metric_type",
+    "start_time",
+    "timezone",
+    "original_value",
+    "normalized_value",
+    "source_platform",
+    "extraction_method",
+    "measurement_type"
+  ],
+  "title": "ATHENA Canonical Health Record",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://athena.local/schemas/canonical-health-record.schema.json"
+}

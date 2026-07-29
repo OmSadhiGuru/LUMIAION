@@ -1,0 +1,13 @@
+{
+  "scan_id": "scan-suspicious-001",
+  "scan_date": "2026-07-20T08:00:00-04:00",
+  "fields": [
+    {"label": "Weight", "value": 80.0, "unit": "kg"},
+    {"label": "Skeletal Muscle Mass", "value": 85.0, "unit": "kg"},
+    {"label": "Lean Body Mass", "value": 60.0, "unit": "kg"},
+    {"label": "Body Fat", "value": 18.0, "unit": "%"},
+    {"label": "Total Body Water", "value": 999.0, "unit": "%"},
+    {"label": "Biological Age", "value": 220, "unit": "years"},
+    {"label": "Some New Field Not In Map", "value": 42, "unit": null}
+  ]
+}

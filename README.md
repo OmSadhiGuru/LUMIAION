@@ -19,6 +19,13 @@
   [CRYPTO_BUY_TIMING.md](CRYPTO_BUY_TIMING.md). In the OSG Grand Archives this
   runtime is **VORTEX** — see
   [docs/04_agents/VORTEX_AGENT.md](docs/04_agents/VORTEX_AGENT.md).
+- 🏋️ **ATHENA** — local-first, source-traceable health intelligence CLI
+  (body composition, cardiovascular, sleep, nutrition) with a canonical
+  schema, SQLite storage, deterministic validation, and Obsidian export.
+  Runs standalone (not wired into the Flask app). See
+  [athena-health-intelligence/README.md](athena-health-intelligence/README.md)
+  and its
+  [audit report](athena-health-intelligence/docs/audit/AUDIT_REPORT.md).
 
 ---
 

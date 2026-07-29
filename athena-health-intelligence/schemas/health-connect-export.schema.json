@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://athena.local/schemas/health-connect-export.schema.json",
+  "title": "ATHENA Health Connect Import Format",
+  "description": "Input format accepted by athena.importers.health_connect.HealthConnectImporter. IMPORTANT: this is a format ATHENA defines for a future companion app to produce (see android/ scaffold, section 12 of the master spec) — it is not an OS-level Health Connect export format, and this importer has only been tested against a synthetic fixture (tests/fixtures/health_connect_export.json), not a real device export. See docs/source-capabilities.md.",
+  "type": "object",
+  "required": ["records"],
+  "properties": {
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["recordType"],
+        "properties": {
+          "recordType": {
+            "type": "string",
+            "enum": ["Weight", "OxygenSaturation", "HeartRateVariabilityRmssd", "BloodPressure", "HeartRate", "Steps", "SleepSession"]
+          },
+          "startTime": {"type": "string", "format": "date-time"},
+          "endTime": {"type": "string", "format": "date-time"},
+          "zoneOffset": {"type": "string"},
+          "value": {"type": "number", "description": "Used by Weight records"},
+          "unit": {"type": "string"},
+          "percentage": {"type": "number", "description": "Used by OxygenSaturation records"},
+          "heartRateVariabilityMillis": {"type": "number"},
+          "systolic": {"type": "number"},
+          "diastolic": {"type": "number"},
+          "count": {"type": "integer", "description": "Used by Steps records"},
+          "samples": {
+            "type": "array",
+            "description": "Used by HeartRate records",
+            "items": {
+              "type": "object",
+              "properties": {
+                "time": {"type": "string", "format": "date-time"},
+                "beatsPerMinute": {"type": "integer"}
+              }
+            }
+          },
+          "stages": {
+            "type": "array",
+            "description": "Used by SleepSession records",
+            "items": {
+              "type": "object",
+              "properties": {
+                "stage": {"type": "string", "enum": ["light", "deep", "rem", "awake"]},
+                "startTime": {"type": "string", "format": "date-time"},
+                "endTime": {"type": "string", "format": "date-time"}
+              }
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "string"},
+              "device": {"type": "string"},
+              "dataOrigin": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
