@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://athena.local/schemas/evolt-scan.schema.json",
+  "title": "ATHENA Evolt Stage-1 Structured Scan Input",
+  "description": "Input format accepted by athena.importers.evolt.EvoltImporter for structured JSON. This is NOT the Evolt 360 PDF report format — PDF extraction (Stage 3) is not implemented. See athena/importers/evolt.py.",
+  "type": "object",
+  "required": ["fields"],
+  "properties": {
+    "scan_id": {
+      "type": "string",
+      "description": "Stable identifier for this scan session; defaults to the import batch id if omitted."
+    },
+    "scan_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the scan."
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "value"],
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Evolt report field label, e.g. 'Skeletal Muscle Mass'. Matched case-insensitively against athena.importers.evolt.EVOLT_FIELD_LABEL_MAP; unrecognized labels are still imported but flagged as unmapped."
+          },
+          "value": {"type": ["number", "string", "null"]},
+          "unit": {"type": ["string", "null"]},
+          "timezone": {"type": "string"}
+        }
+      }
+    }
+  }
+}

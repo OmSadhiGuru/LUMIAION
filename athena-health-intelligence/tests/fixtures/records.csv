@@ -1,0 +1,3 @@
+metric_type,value,unit,start_time,timezone,measurement_type
+body_weight_kg,79.8,kg,2026-07-18T07:00:00-04:00,America/New_York,manual
+steps_count,8421,count,2026-07-18T00:00:00-04:00,America/New_York,device_estimated

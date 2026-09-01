@@ -1,0 +1,34 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# Runtime local-first data — never commit personal health data.
+data/raw/*
+!data/raw/.gitkeep
+data/normalized/*
+!data/normalized/.gitkeep
+data/derived/*
+!data/derived/.gitkeep
+data/athena.db
+data/*.db-journal
+data/*.db-wal
+
+# Generated Obsidian vault content is personal — keep only the folder structure.
+vault/ATHENA/05-DAILY-NOTES/*
+!vault/ATHENA/05-DAILY-NOTES/.gitkeep
+vault/ATHENA/06-WEEKLY-REVIEWS/*
+!vault/ATHENA/06-WEEKLY-REVIEWS/.gitkeep
+vault/ATHENA/08-BODY-SCANS/*
+!vault/ATHENA/08-BODY-SCANS/.gitkeep
+vault/ATHENA/12-INSIGHTS/*
+!vault/ATHENA/12-INSIGHTS/.gitkeep
+vault/ATHENA/13-ALERTS/*
+!vault/ATHENA/13-ALERTS/.gitkeep
+vault/ATHENA/14-DASHBOARDS/*
+!vault/ATHENA/14-DASHBOARDS/.gitkeep
+vault/ATHENA/17-IMPORT-LOGS/*
+!vault/ATHENA/17-IMPORT-LOGS/.gitkeep
+
+.env

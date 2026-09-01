@@ -1,0 +1,14 @@
+{
+  "scan_id": "scan-valid-001",
+  "scan_date": "2026-07-15T08:00:00-04:00",
+  "fields": [
+    {"label": "Weight", "value": 80.0, "unit": "kg"},
+    {"label": "Skeletal Muscle Mass", "value": 35.0, "unit": "kg"},
+    {"label": "Lean Body Mass", "value": 62.0, "unit": "kg"},
+    {"label": "Body Fat", "value": 18.0, "unit": "%"},
+    {"label": "Total Body Water", "value": 55.0, "unit": "%"},
+    {"label": "BMR", "value": 1800, "unit": "kcal"},
+    {"label": "Visceral Fat Rating", "value": 8, "unit": "rating"},
+    {"label": "Biological Age", "value": 32, "unit": "years"}
+  ]
+}

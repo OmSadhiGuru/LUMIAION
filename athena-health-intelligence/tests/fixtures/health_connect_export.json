@@ -1,0 +1,64 @@
+{
+  "records": [
+    {
+      "recordType": "Weight",
+      "value": 81.0,
+      "unit": "kg",
+      "startTime": "2026-07-27T07:05:00-04:00",
+      "zoneOffset": "-04:00",
+      "metadata": {"id": "hc-weight-1", "device": "Samsung Galaxy Watch", "dataOrigin": "com.sec.android.app.shealth"}
+    },
+    {
+      "recordType": "OxygenSaturation",
+      "percentage": 97.0,
+      "startTime": "2026-07-27T02:00:00-04:00",
+      "zoneOffset": "-04:00",
+      "metadata": {"id": "hc-spo2-1", "device": "Samsung Galaxy Watch"}
+    },
+    {
+      "recordType": "HeartRateVariabilityRmssd",
+      "heartRateVariabilityMillis": 42.5,
+      "startTime": "2026-07-27T02:00:00-04:00",
+      "zoneOffset": "-04:00",
+      "metadata": {"id": "hc-hrv-1", "device": "Samsung Galaxy Watch"}
+    },
+    {
+      "recordType": "BloodPressure",
+      "systolic": 118,
+      "diastolic": 76,
+      "startTime": "2026-07-27T08:00:00-04:00",
+      "zoneOffset": "-04:00",
+      "metadata": {"id": "hc-bp-1", "device": "manual cuff"}
+    },
+    {
+      "recordType": "HeartRate",
+      "samples": [
+        {"time": "2026-07-27T06:00:00-04:00", "beatsPerMinute": 58},
+        {"time": "2026-07-27T06:01:00-04:00", "beatsPerMinute": 60}
+      ],
+      "zoneOffset": "-04:00",
+      "metadata": {"id": "hc-hr-1", "device": "Samsung Galaxy Watch"}
+    },
+    {
+      "recordType": "Steps",
+      "count": 9120,
+      "startTime": "2026-07-27T00:00:00-04:00",
+      "endTime": "2026-07-27T23:59:59-04:00",
+      "zoneOffset": "-04:00",
+      "metadata": {"id": "hc-steps-1", "device": "Samsung Galaxy Watch"}
+    },
+    {
+      "recordType": "SleepSession",
+      "startTime": "2026-07-26T23:00:00-04:00",
+      "endTime": "2026-07-27T06:30:00-04:00",
+      "zoneOffset": "-04:00",
+      "stages": [
+        {"stage": "light", "startTime": "2026-07-26T23:00:00-04:00", "endTime": "2026-07-27T01:00:00-04:00"},
+        {"stage": "deep", "startTime": "2026-07-27T01:00:00-04:00", "endTime": "2026-07-27T02:30:00-04:00"},
+        {"stage": "rem", "startTime": "2026-07-27T02:30:00-04:00", "endTime": "2026-07-27T04:00:00-04:00"},
+        {"stage": "light", "startTime": "2026-07-27T04:00:00-04:00", "endTime": "2026-07-27T06:30:00-04:00"}
+      ],
+      "metadata": {"id": "hc-sleep-1", "device": "Samsung Galaxy Watch"}
+    }
+  ]
+}

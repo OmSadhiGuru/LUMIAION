@@ -1,0 +1,8 @@
+{
+  "metric_type": "body_weight_kg",
+  "value": 81.2,
+  "unit": "kg",
+  "start_time": "2026-07-29T07:00:00-04:00",
+  "timezone": "America/New_York",
+  "measurement_type": "manual"
+}

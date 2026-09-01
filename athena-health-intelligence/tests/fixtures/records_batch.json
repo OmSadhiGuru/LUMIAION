@@ -1,0 +1,39 @@
+{
+  "source_platform": "manual",
+  "records": [
+    {
+      "metric_type": "body_weight_kg",
+      "value": 80.5,
+      "unit": "kg",
+      "start_time": "2026-07-22T07:00:00-04:00",
+      "timezone": "America/New_York",
+      "measurement_type": "manual"
+    },
+    {
+      "metric_type": "body_weight_kg",
+      "value": 80.9,
+      "unit": "kg",
+      "start_time": "2026-07-25T07:00:00-04:00",
+      "timezone": "America/New_York",
+      "measurement_type": "manual"
+    },
+    {
+      "metric_type": "resting_heart_rate_bpm",
+      "value": 58,
+      "unit": "bpm",
+      "start_time": "2026-07-25T06:30:00-04:00",
+      "timezone": "America/New_York",
+      "measurement_type": "measured",
+      "source_device": "synthetic-test-watch"
+    },
+    {
+      "metric_type": "resting_heart_rate_bpm",
+      "value": 500,
+      "unit": "bpm",
+      "start_time": "2026-07-26T06:30:00-04:00",
+      "timezone": "America/New_York",
+      "measurement_type": "measured",
+      "source_device": "synthetic-test-watch"
+    }
+  ]
+}
